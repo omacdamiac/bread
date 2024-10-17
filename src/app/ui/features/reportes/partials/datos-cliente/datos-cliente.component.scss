@@ -1,0 +1,16 @@
+.close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    padding: 5px;
+    line-height: 14px;
+    min-width: auto;
+}
+::ng-deep .mat{
+    &-dialog-container {
+        position: relative !important;
+    }
+    // &-dialog-content {
+    //     max-height: fit-content!important;
+    // }
+}

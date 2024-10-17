@@ -1,0 +1,42 @@
+@import "/src/scss/variables";
+ul {
+    & {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        
+    }
+
+    li {
+        & {
+            display: inline;
+            a {
+                font-size: 0.875rem;
+                color: $gray_dark;
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                line-height: 2.5rem;
+                margin: 0;
+                text-decoration: none;
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+
+        &:before {
+            content: "\203A";
+            // content: ">";
+            margin: 0 6px;
+            font-size: 1.375rem;
+            color: $font-color;
+            font-weight: 500;
+        }
+
+        &:first-child:before {
+            content: "";
+            margin: 0;
+        }
+    }
+}

@@ -1,0 +1,13 @@
+.content {
+  &-login {
+    & > .mx-auto {
+      width: 471px;
+    }
+  }
+
+  &-img {
+    h1 {
+      color: white;
+    }
+  }
+}

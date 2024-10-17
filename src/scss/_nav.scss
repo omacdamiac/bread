@@ -1,0 +1,11 @@
+@import "/src/scss/variables";
+nav {
+  background: $primary;
+  color: $white;
+  height: 46px;
+  .user {
+    width: 40px;
+    line-height: 40px;
+    color: $purple;
+  }
+}

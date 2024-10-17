@@ -1,0 +1,30 @@
+<fieldset [formGroup]="formParent">
+  <label [for]="nameDesde" class="fecha"
+  >{{ label }}
+  <span
+    [ngClass]="{
+      isvalid:
+        formParent.controls[nameDesde].invalid &&
+        (formParent.controls[nameDesde].dirty || formParent.controls[nameDesde].touched)
+    }"
+    >*</span
+  >
+</label>
+  <mat-form-field appearance="outline" class="fecha">
+    <mat-date-range-input [rangePicker]="picker" (click)="picker.open()">
+      <input matStartDate [formControlName]="nameDesde" [placeholder]="placeholderDesde" />
+      <input matEndDate [formControlName]="nameHasta" [placeholder]="placeholderHasta" />
+    </mat-date-range-input>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-date-range-picker #picker></mat-date-range-picker>
+  </mat-form-field>
+  <span
+  class="isvalid"
+  *ngIf="
+    formParent.controls[nameDesde].invalid &&
+    (formParent.controls[nameDesde].dirty || formParent.controls[nameDesde].touched)
+  "
+>
+  {{ label }} es requerido
+</span>
+</fieldset>

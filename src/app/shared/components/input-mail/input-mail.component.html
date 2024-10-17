@@ -1,0 +1,52 @@
+<fieldset [formGroup]="formParent">
+  <label [for]="name"
+    >{{ label }}
+    <span
+      [ngClass]="{
+        isvalid:
+          formParent.controls[name].invalid &&
+          (formParent.controls[name].dirty || formParent.controls[name].touched)
+      }"
+      >*</span
+    >
+  </label>
+
+  <div
+    [ngClass]="{
+      'was-validated':
+        (formParent.controls[name].errors === null &&
+          formParent.controls[name].invalid) ||
+        formParent.controls[name].dirty || formParent.controls[name].touched ||
+        (formParent.controls[name].errors?.required &&
+          formParent.controls[name].errors?.pattern)
+    }"
+  >
+    <input
+      class="form-control"
+      [name]="name"
+      [id]="name"
+      [placeholder]="placeholder"
+      [formControlName]="name"
+      [required]="required"
+      [value]="value"
+    />
+  </div>
+
+  <div
+    class="isvalid"
+    *ngIf="
+      formParent.controls[name].invalid &&
+      (formParent.controls[name].dirty || formParent.controls[name].touched)
+    "
+  >
+    <span *ngIf="formParent.controls[name].errors?.required">
+      {{ name }} es requerido
+    </span>
+    <span *ngIf="formParent.controls[name].errors?.pattern">
+      {{ name }} es invalido
+    </span>
+  </div>
+  <!-- <div *ngIf="name.errors?.['required']">
+          Name is required.
+        </div> -->
+</fieldset>

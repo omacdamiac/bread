@@ -1,0 +1,634 @@
+<app-title [title]="title"></app-title>
+<mat-tab-group mat-stretch-tabs>
+  <!-- <mat-tab label="Usuarios" class="text-center">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="float-end">
+            <app-button
+              [load]="load"
+              [class]="btnAddUsers.class"
+              [texto]="btnAddUsers.texto"
+              [color]="btnAddUsers.color"
+              (click)="openDalog(true)"
+            ></app-button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-8 offset-md-2">
+        <mat-card class="example-card my-4">
+          <h2>
+            <mat-icon class="icon_title">reorder</mat-icon> Listado de usuarios
+            <span class="example-spacer"></span>
+            <mat-icon matTooltip="Recargar lista" (click)="reload()"
+              >refresh</mat-icon
+            >
+          </h2>
+          <mat-list role="list">
+            <mat-divider></mat-divider>
+            <ng-container *ngFor="let item of list_users">
+              <mat-list-item
+                class="perfiles"
+                role="listitem"
+                [ngClass]="{ readon: item.estado }"
+                >{{ item?.nombres }}
+                <span class="example-spacer"></span>
+                <mat-icon
+                  matTooltip="Editar {{ item?.nombre_perfil }}"
+                  (click)="update()"
+                  >edit</mat-icon
+                >
+                <mat-icon
+                  matTooltip="Eliminar {{ item?.nombre_perfil }}"
+                  (click)="delete(item.id)"
+                  >delete</mat-icon
+                >
+                mat-icon
+                  matTooltip="Gestionar {{ item?.nombre_perfil }}"
+                  (click)="manage(item)"
+                  >arrow_circle_right</mat-icon
+                >
+                <div class="clearfix"></div>
+              </mat-list-item>
+              <mat-divider></mat-divider>
+            </ng-container>
+          </mat-list>
+        </mat-card>
+      </div>
+    </div>
+  </mat-tab> -->
+
+  <!-- FUNCIONALIDADES -->
+  <mat-tab class="text-center">
+    <ng-template mat-tab-label>
+      <span (click)="test('Funcionalidades')">Administrar funcionalidades</span>
+    </ng-template>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="float-end">
+            <app-button
+              [load]="load"
+              [class]="btnAddFunction.class"
+              [texto]="btnAddFunction.texto"
+              [color]="btnAddFunction.color"
+              (click)="openDialog('funcionalidad', undefined)"
+            ></app-button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <!-- LISTADO FUNCIONALIDADES -->
+      <div class="col-md-8 offset-md-2">
+        <mat-card class="example-card my-4">
+          <h2>
+            <mat-icon class="icon_title">reorder</mat-icon> Listado de
+            funcionalidades
+            <span class="example-spacer"></span>
+            <mat-icon matTooltip="Recargar lista" (click)="listado()"
+              >refresh</mat-icon
+            >
+          </h2>
+          <mat-list role="list">
+            <mat-divider></mat-divider>
+            <ng-container *ngIf="noDataFun">
+              <mat-list-item>
+                <p>No se encontrarón registros</p>
+              </mat-list-item>
+            </ng-container>
+            <ng-container
+              *ngFor="
+                let item of list | orderPipe : 'desc' : 'id_funcionalidad';
+                index as i;
+                trackBy: trackByFn
+              "
+            >
+              <mat-list-item
+                class="perfiles"
+                role="listitem"
+                [ngClass]="{ readon: item.estado === 0 }"
+                >{{ item?.nombre_funcionalidad }}
+                <span class="example-spacer"></span>
+                <!-- <app-select
+                    [formParent]="formUsers"
+                    [label]="selectPadre.label"
+                    [name]="selectPadre.name"
+                    [required]="selectPadre.required"
+                    [options]="selectPadre.options"
+                  ></app-select> -->
+                <mat-icon
+                  matTooltip="Gestionar {{ item?.nombre_funcionalidad }}"
+                  (click)="manage(item, i)"
+                  >{{
+                    item.childs.length !== 0
+                      ? "arrow_forward_ios"
+                      : "add_circle"
+                  }}</mat-icon
+                >
+                <!-- <mat-icon
+                      class="d-none"
+                      matTooltip="Gestionar {{ item?.nombre_perfil }}"
+                      >keyboard_arrow_down</mat-icon
+                    > -->
+                <mat-icon
+                  matTooltip="Editar {{ item?.nombre_funcionalidad }}"
+                  (click)="openDialog('funcionalidad', item)"
+                  >edit</mat-icon
+                >
+                <mat-icon
+                  matTooltip="Eliminar {{ item?.nombre_funcionalidad }}"
+                  (click)="delete(item, 'funcionalidad')"
+                  >delete</mat-icon
+                >
+
+                <div class="clearfix"></div>
+              </mat-list-item>
+              <div #subs [id]="item.id_funcionalidad" class="d-none border">
+                <!-- <mat-list-item
+                    [ngClass]="{ 'd-none': showFunc }"
+                  > -->
+                <mat-list-item class="h-auto">
+                  <div class="container px-0 bg-table-">
+                    <div class="row">
+                      <div class="col-md-10 offset-md-2 bg-white px-0">
+                        <mat-divider></mat-divider>
+                        <div class="float-end">
+                          <app-button
+                            [load]="load"
+                            [class]="btnAddSubFunction.class"
+                            [texto]="btnAddSubFunction.texto"
+                            [color]="btnAddSubFunction.color"
+                            (click)="openDialog('subfuncionalidad', undefined)"
+                          ></app-button>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="row"
+                      *ngFor="
+                        let i of item.childs
+                          | orderPipe : 'desc' : 'id_subfuncionalidad';
+                        trackBy: trackByFn
+                      "
+                    >
+                      <div class="col-md-10 offset-md-2 bg-white">
+                        <!-- {{ item.id }} -->
+
+                        <!-- LIST SUBFUNCIONALIDAD -->
+                        <mat-divider></mat-divider>
+
+                        <mat-list-item class="perfiles" role="listitem">
+                          {{ i.nombre_subfuncionalidad }}
+                          <!-- {{ item?.nombre_funcionalidad }} -->
+                          <span class="example-spacer"></span>
+                          <!-- <app-select
+                            [formParent]="formUsers"
+                            [label]="selectPadre.label"
+                            [name]="selectPadre.name"
+                            [required]="selectPadre.required"
+                            [options]="selectPadre.options"
+                          ></app-select> -->
+                          <!-- <mat-icon
+                              matTooltip="Gestionar {{ item?.nombre_perfil }}"
+                              (click)="manage(item, item.id)"
+                              >chevron_right</mat-icon
+                            >
+                            <mat-icon
+                              class="d-none"
+                              matTooltip="Gestionar {{ item?.nombre_perfil }}"
+                              >keyboard_arrow_down</mat-icon
+                            > -->
+                          <mat-icon
+                            matTooltip="Editar {{ item?.nombre_funcionalidad }}"
+                            (click)="openDialog('subfuncionalidad', i)"
+                            >edit</mat-icon
+                          >
+                          <mat-icon
+                            matTooltip="Eliminar {{
+                              item?.nombre_funcionalidad
+                            }}"
+                            (click)="delete(i, 'subfuncionalidad')"
+                            >delete</mat-icon
+                          >
+
+                          <div class="clearfix"></div>
+                        </mat-list-item>
+                      </div>
+                    </div>
+                  </div>
+                </mat-list-item>
+              </div>
+              <mat-divider></mat-divider>
+            </ng-container>
+          </mat-list>
+        </mat-card>
+      </div>
+    </div>
+  </mat-tab>
+
+  <!-- PERFILES -->
+  <mat-tab class="text-center">
+    <ng-template mat-tab-label>
+      <span (click)="adminProfile()">Accesos por perfil de usuario</span>
+    </ng-template>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="float-end">
+            <app-button
+              [load]="load"
+              [class]="btnAddPerfil.class"
+              [texto]="btnAddPerfil.texto"
+              [color]="btnAddPerfil.color"
+              (click)="openDialog('perfil', undefined)"
+            ></app-button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="mat-card mb-3 offset-md-1 col-md-10">
+        <div class="row">
+          <!-- LISTADO PERFILES -->
+          <div class="col-md-6">
+            <!-- <mat-card class="example-card my-4 pe-0"> -->
+            <div class="example-card-">
+              <h2>
+                <mat-icon class="icon_title">reorder</mat-icon>Perfiles
+                <span class="example-spacer"></span>
+                <mat-icon matTooltip="Recargar lista" (click)="listProfile()"
+                  >refresh</mat-icon
+                >
+              </h2>
+
+              <!-- <mat-selection-list #shoes [multiple]="false">
+            <mat-list-option *ngFor="let shoe of list_profile" [value]="shoe">
+              {{shoe?.nombre_perfil}}
+            </mat-list-option>
+          </mat-selection-list> -->
+
+              <mat-selection-list role="list" #item [multiple]="false">
+                <mat-divider></mat-divider>
+                <ng-container *ngIf="noDataProfile">
+                  <mat-list-item>
+                    <p>No se encontrarón registros</p>
+                  </mat-list-item>
+                </ng-container>
+                <ng-container
+                  *ngFor="
+                    let item of list_profile | orderPipe : 'desc' : 'id_perfil';
+                    trackBy: trackByFn
+                  "
+                >
+                  <mat-list-option
+                    [value]="item"
+                    (click)="relacionPFOld(item)"
+                    class="perfiles"
+                    role="listitem"
+                    [ngClass]="{ readon: item.estado === 0 }"
+                    >{{ item?.nombre_perfil }}
+                    <span class="example-spacer"></span>
+                    <mat-icon
+                      matTooltip="Editar {{ item?.nombre_perfil }}"
+                      (click)="openDialog('perfil', item)"
+                      >edit</mat-icon
+                    >
+                    <mat-icon
+                      matTooltip="Eliminar {{ item?.nombre_perfil }}"
+                      (click)="delete(item, 'perfil')"
+                      >delete</mat-icon
+                    >
+                    <mat-icon matTooltip="Gestionar {{ item?.nombre_perfil }}"
+                      >arrow_circle_right</mat-icon
+                    >
+                    <!-- <mat-icon
+                matTooltip="Gestionar {{ item?.nombre_perfil }}"
+                (click)="relacionPFOld(item)"
+                >arrow_circle_right</mat-icon
+              > -->
+                    <div class="clearfix"></div>
+                  </mat-list-option>
+                  <mat-divider></mat-divider>
+                </ng-container>
+              </mat-selection-list>
+            </div>
+          </div>
+
+          <!-- LISTADO FUNCIONALIDADES -->
+          <div class="col-md-6">
+            <mat-card class="example-card my-4 brdcard">
+              <h2>
+                <mat-icon class="icon_title">person_add</mat-icon>
+                Funcionalidades:
+                <span class="example-spacer"></span>
+                {{ body_profile?.nombre_perfil }}
+                <!-- <mat-icon matTooltip="Recargar lista" (click)="reload()"
+                >refresh</mat-icon
+              > -->
+              </h2>
+
+              <mat-list role="list">
+                <!-- <mat-divider></mat-divider> -->
+                <section class="example-section" *ngIf="body_profile">
+                  <!-- <span class="example-list-section">
+                <mat-checkbox
+                  class="example-margin"
+                  [checked]="allComplete"
+                  color="primary"
+                  [indeterminate]="someCompleteP()"
+                  (change)="setAllP($event.checked)"
+                >
+                  {{ chkFuncionalidades.name }}
+                </mat-checkbox>
+                <mat-divider></mat-divider>
+              </span> -->
+                  <span class="example-list-section">
+                    <ul>
+                      <ng-container
+                        *ngIf="
+                          body_profile.funcionalidades &&
+                            body_profile.funcionalidades?.length !== 0;
+                          else newCHK
+                        "
+                      >
+                        <li
+                          *ngFor="
+                            let func of chkFuncionalidades?.functionalities;
+                            index as i
+                          "
+                        >
+                          <!-- {{ body_profile?.funcionalidades[i].id_funcionalidad | json}} - {{ func.id_funcionalidad | json}} -->
+                          <!-- {{ func.checked | json}} 
+                      {{ func.id_funcionalidad | json}} 
+                      {{ list_profile | json}}  -->
+                          <mat-checkbox
+                            [(ngModel)]="
+                              func.id_funcionalidad ==
+                              body_profile.id_funcionalidad
+                            "
+                            color="primary"
+                            (ngModelChange)="updateAllCompleteP()"
+                          >
+                            {{ func.nombre_funcionalidad }}
+                          </mat-checkbox>
+                          <mat-divider></mat-divider>
+                        </li>
+                      </ng-container>
+
+                      <ng-template #newCHK>
+                        <li
+                          *ngFor="
+                            let func of chkFuncionalidades?.functionalities;
+                            index as i
+                          "
+                        >
+                          <!-- {{ body_profile?.funcionalidades[i].id_funcionalidad | json}} - {{ func.id_funcionalidad | json}} -->
+                          <mat-checkbox
+                            [(ngModel)]="func.checked"
+                            color="primary"
+                            (ngModelChange)="updateAllCompleteP()"
+                          >
+                            {{ func.nombre_funcionalidad }}
+                          </mat-checkbox>
+                          <mat-divider></mat-divider>
+                        </li>
+                      </ng-template>
+                    </ul>
+                  </span>
+                </section>
+              </mat-list>
+              <div class="row" *ngIf="body_profile">
+                <div class="col-md-12">
+                  <div class="float-end" *ngIf="body_profile?.relaciones">
+                    <ng-container
+                      *ngIf="
+                        body_profile?.relaciones?.length !== 0;
+                        else newBtn
+                      "
+                    >
+                      <app-button
+                        [load]="load"
+                        [class]="btnEdit.class"
+                        [texto]="btnEdit.texto"
+                        [color]="btnEdit.color"
+                        (click)="editRelacionPF(body_profile)"
+                      ></app-button>
+                    </ng-container>
+                    <ng-template #newBtn>
+                      <app-button
+                        [load]="load"
+                        [class]="btnSave.class"
+                        [texto]="btnSave.texto"
+                        [color]="btnSave.color"
+                        (click)="createRelacionPF(body_profile)"
+                      ></app-button>
+                    </ng-template>
+                  </div>
+                </div>
+                <div class="clearfix"></div>
+              </div>
+            </mat-card>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-tab>
+
+  <!-- ROLES -->
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <span (click)="adminRole()">Administrar permisos por rol</span>
+    </ng-template>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="float-end">
+            <app-button
+              [load]="load"
+              [class]="btnAddRol.class"
+              [texto]="btnAddRol.texto"
+              [color]="btnAddRol.color"
+              (click)="openDialog('rol', undefined)"
+            ></app-button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="mat-card mb-3 offset-md-1 col-md-10">
+        <div class="row">
+          <!-- LISTADO ROLES -->
+          <div class="col-md-6">
+            <!-- <mat-card class="example-card my-4"> -->
+            <div class="example-card-">
+              <h2>
+                <mat-icon class="icon_title">reorder</mat-icon> Listado roles
+                <span class="example-spacer"></span>
+                <mat-icon matTooltip="Recargar lista" (click)="listRol()"
+                  >refresh</mat-icon
+                >
+              </h2>
+              <mat-selection-list role="list" #item [multiple]="false">
+                <mat-divider></mat-divider>
+                <ng-container *ngIf="noDataRole">
+                  <mat-list-item>
+                    <p>No se encontrarón registros</p>
+                  </mat-list-item>
+                </ng-container>
+                <ng-container
+                  *ngFor="
+                    let item of list_roles | orderPipe : 'desc' : 'id_rol';
+                    trackBy: trackByFn
+                  "
+                >
+                  <mat-list-option
+                    [value]="item"
+                    (click)="relacionRP(item)"
+                    class="perfiles"
+                    role="listitem"
+                    [ngClass]="{ readon: item.estado === 0 }"
+                    >{{ item?.nombre_rol }}
+                    <span class="example-spacer"></span>
+                    <mat-icon
+                      matTooltip="Editar {{ item?.nombre_rol }}"
+                      (click)="openDialog('rol', item)"
+                      >edit</mat-icon
+                    >
+                    <mat-icon
+                      matTooltip="Eliminar {{ item?.nombre_rol }}"
+                      (click)="delete(item, 'rol')"
+                      >delete</mat-icon
+                    >
+                    <mat-icon matTooltip="Gestionar permisos"
+                      >arrow_circle_right</mat-icon
+                    >
+                    <div class="clearfix"></div>
+                  </mat-list-option>
+                  <mat-divider></mat-divider>
+                </ng-container>
+              </mat-selection-list>
+            </div>
+          </div>
+
+          <!-- LISTADO PERMISOS -->
+          <div class="col-md-6">
+            <!-- <mat-card class="example-card my-4" [ngClass]="{ 'd-none': show }"> -->
+            <mat-card class="example-card my-4 brdcard">
+              <h2>
+                <mat-icon class="icon_title">person_add</mat-icon>Asignar
+                permisos a:
+                <span class="example-spacer"></span>
+                {{ body_role?.nombre_rol }}
+                <!-- <mat-icon matTooltip="Recargar lista" (click)="listPermiso()"
+                >refresh</mat-icon
+              > -->
+              </h2>
+
+              <mat-list role="list">
+                <!-- <mat-divider></mat-divider> -->
+                <section class="example-section" *ngIf="body_role">
+                  <!-- <span class="example-list-section">
+                <mat-checkbox
+                  class="example-margin"
+                  [checked]="allComplete"
+                  color="primary"
+                  [indeterminate]="someCompleteR()"
+                  (change)="setAllR($event.checked)"
+                >
+                  {{ chkPermissions.name }}
+                </mat-checkbox>
+                <mat-divider></mat-divider>
+              </span> -->
+                  <span class="example-list-section">
+                    <ul>
+                      <ng-container
+                        *ngIf="
+                          body_role.permisos &&
+                            body_profile.permisos?.length !== 0;
+                          else newCHK
+                        "
+                      >
+                        <li
+                          *ngFor="
+                            let perm of chkPermissions?.permissions;
+                            index as i
+                          "
+                        >
+                          <!-- {{ body_profile?.funcionalidades[i].id_funcionalidad | json}} - {{ func.id_funcionalidad | json}} -->
+                          <!-- {{ func.checked | json}} 
+                      {{ func.id_funcionalidad | json}} 
+                      {{ list_profile | json}}  -->
+                          <mat-checkbox
+                            [(ngModel)]="
+                              perm.id_permiso == body_role.id_permiso
+                            "
+                            color="primary"
+                            (ngModelChange)="updateAllCompleteP()"
+                          >
+                            {{ perm.nombre_permiso }}
+                          </mat-checkbox>
+                          <mat-divider></mat-divider>
+                        </li>
+                      </ng-container>
+                      <ng-template #newCHK>
+                        <li
+                          *ngFor="
+                            let perm of chkPermissions?.permissions;
+                            index as i
+                          "
+                        >
+                          <!-- {{ body_profile?.funcionalidades[i].id_funcionalidad | json}} - {{ func.id_funcionalidad | json}} -->
+                          <mat-checkbox
+                            [(ngModel)]="perm.checked"
+                            color="primary"
+                            (ngModelChange)="updateAllCompleteP()"
+                          >
+                            {{ perm.nombre_permiso }}
+                          </mat-checkbox>
+                          <mat-divider></mat-divider>
+                        </li>
+                      </ng-template>
+                    </ul>
+                  </span>
+                </section>
+              </mat-list>
+              <div class="row" *ngIf="body_role">
+                <div class="col-md-12">
+                  <div class="float-end" *ngIf="body_role?.relaciones">
+                    <ng-container
+                      *ngIf="body_role?.relaciones?.length === 0; else Edit"
+                    >
+                    <app-button
+                      [load]="load"
+                      [class]="btnSave.class"
+                      [texto]="btnSave.texto"
+                      [color]="btnSave.color"
+                      (click)="createRelacionRP(body_role)"
+                    ></app-button>
+                  </ng-container>
+                  <ng-template #Edit>
+                      <app-button
+                        [load]="load"
+                        [class]="btnEdit.class"
+                        [texto]="btnEdit.texto"
+                        [color]="btnEdit.color"
+                        (click)="editRelacionRP(body_role)"
+                      ></app-button>
+                    </ng-template>
+                  </div>
+                </div>
+                <div class="clearfix"></div>
+              </div>
+            </mat-card>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-tab>
+</mat-tab-group>

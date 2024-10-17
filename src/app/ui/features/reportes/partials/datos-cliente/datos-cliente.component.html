@@ -1,0 +1,57 @@
+<h1>Datos de cliente</h1>
+<mat-icon mat-dialog-close class="close">cancel</mat-icon>
+<mat-card class="mb-4 w-100 datos">
+
+  <div class="row">
+    <div class="col-md-3"><label for="">Código SBS:</label><span>{{ data[0].cliente?.codigo_deudor_sbs }}</span> </div>
+    <div class="col-md-3"><label for="">Nombres:</label><span>{{ data[0].cliente?.primer_nombre + ' ' + data[0].cliente?.segundo_nombre }}</span></div>
+    <div class="col-md-3"><label for="">Apellidos:</label><span>{{ data[0].cliente?.apellido_paterno_razon_social + ' ' + data[0].cliente?.apellido_materno }}</span></div>
+    <div class="col-md-3"><label for="">N° documento:</label><span>{{ data[0].cliente?.tipo_documento_identidad }} {{ data[0].cliente?.documento_identidad }}</span></div>
+</div>
+</mat-card>
+<div class="mt-3 bg-table mat-elevation-z8- mb-3 deudor" *ngIf="true">
+  <h2 class="px-3 py-3">Información del deudor</h2>
+  <app-table
+  [header]="data[1]?.header"
+  [datos]="data[1]?.deudor"
+  [body]="data[1]?.body"
+  ></app-table>
+</div>
+
+<div class="mt-3 bg-table mat-elevation-z8- mb-3 deudor" *ngIf="true">
+    <h2 class="px-3 py-3">Información detallada de los saldos por entidad financiera</h2>
+    <app-table
+    [header]="data[2]?.header"
+    [datos]="data[2]?.entidad"
+    [body]="data[2]?.body"
+      ></app-table>
+  </div>
+
+<!-- <div class="mt-3 bg-table mat-elevation-z8- mb-3 entidad" *ngIf="displayedColumnsEntidad">
+  <h2 class="px-3 py-3">Información detallada de los saldos por entidad financiera</h2>
+  <table mat-table [dataSource]="dataSourceEntidad" matSort>
+    <ng-container
+      [matColumnDef]="column"
+      *ngFor="let column of displayedColumnsEntidad"
+    >
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ column | header }}</th>
+      <td mat-cell *matCellDef="let element">
+          {{ element[column] }}
+        <div *ngIf="(element[column] | typeOf) === 'object'">
+          <mat-icon matTooltipPosition="left" [matTooltip]="'Ver Detalles'" (click)="openDialog(element[column])">search</mat-icon>
+        </div>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumnsEntidad"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumnsEntidad"></tr>
+
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">No encontramos registros</td>
+    </tr>
+  </table>
+  <mat-paginator
+  [pageSizeOptions]="[5, 10, 25, 100]"
+  aria-label="Select page of users"
+></mat-paginator>
+</div> -->
+

@@ -1,0 +1,40 @@
+<div class="row">
+  <div class="col-sm-5 p-0">
+    <div class="content-img">
+        <div class="text-center w-100 position-relative">
+            <img src="./assets/logo.png" alt="Banco Ripley">
+            <h1 class="mt-4">Plataforma Regulatoria Integral</h1>
+        </div>
+      <!-- <img class="img" src="/assets/bg-login.jpg" alt="Login Banco ripley" /> -->
+    </div>
+  </div>
+  <div class="col-sm-7 d-flex align-items-center content-login">
+    <div class="mx-auto">
+        <h1 class="login fw-bold mat-primary text-center">INGRESAR</h1>
+        <app-input
+        [required]="inputUser.required"
+        [label]="inputUser.label"
+        [name]="inputUser.name"
+        [type]="inputUser.type"
+        [placeholder]="inputUser.place"
+        [formParent]="formAuth"
+        ></app-input>
+        <app-input
+        [required]="inputPass.required"
+        [label]="inputPass.label"
+        [name]="inputPass.name"
+        [type]="inputPass.type"
+        [placeholder]="inputPass.place"
+        [formParent]="formAuth"
+        ></app-input>
+        <p></p>
+        <app-button
+        [load]="load"
+        [class]="btnIn.class"
+        [texto]="btnIn.texto"
+        [color]="btnIn.color"
+        (click)="login()"
+        ></app-button>
+    </div>
+  </div>
+</div>

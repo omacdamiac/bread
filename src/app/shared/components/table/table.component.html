@@ -1,0 +1,50 @@
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th *ngFor="let head of header">
+          <ng-container *ngIf="!head.includes('accion'); else actions">
+            {{ head | header }}
+          </ng-container>
+          <ng-template #actions> Acciones </ng-template>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+    <ng-container *ngFor="let d of datos">
+      <tr>
+        <td *ngFor="let td of body">
+            <ng-container *ngIf="!td.includes('fecha')">
+              {{ d[td.trim()] }}
+            </ng-container>
+            <ng-container *ngIf="td.includes('fecha')">
+              {{ d[td.trim()] | date : "dd/MM/yyyy" }}
+            </ng-container>
+            <ng-container
+              *ngIf="td.includes('accion') && modal"
+              class="text-center"
+            >
+              <mat-icon
+                matTooltipPosition="left"
+                [matTooltip]="'Ver Detalles'"
+                (click)="openDialog(d)"
+                >search</mat-icon
+              >
+            </ng-container>
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+  <!-- <mat-paginator
+  [pageSizeOptions]="[5, 10, 25, 100]"
+  aria-label="Select page of users"
+  ></mat-paginator> -->
+  <mat-paginator
+    [length]="datos?.length"
+    [pageSize]="10"
+    [pageSizeOptions]="[5, 10, 25, 100]"
+    aria-label="Select page"
+  >
+  </mat-paginator>
+</div>

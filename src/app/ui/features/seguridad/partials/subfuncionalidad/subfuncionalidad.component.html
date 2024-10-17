@@ -1,0 +1,71 @@
+<h2 mat-dialog-title>
+  {{ data ? "Editar subfuncionalidad" : "Nueva subfuncionalidad" }}
+</h2>
+<mat-divider></mat-divider>
+<mat-dialog-content class="mat-typography- my-4">
+  <div class="row">
+    <div class="col-md-12">
+      <app-input
+        [required]="inputSubFuncionalidad.required"
+        [label]="inputSubFuncionalidad.label"
+        [name]="inputSubFuncionalidad.name"
+        [type]="inputSubFuncionalidad.type"
+        [placeholder]="inputSubFuncionalidad.place"
+        [formParent]="formSubFuncionalidad"
+        [value]="data?.nombre_subfuncionalidad"
+      ></app-input>
+    </div>
+  </div>
+  <div class="row my-3">
+    <div class="col-md-124">
+      <app-input
+        [required]="inputSubfuncionalidadLink.required"
+        [label]="inputSubfuncionalidadLink.label"
+        [name]="inputSubfuncionalidadLink.name"
+        [type]="inputSubfuncionalidadLink.type"
+        [placeholder]="inputSubfuncionalidadLink.place"
+        [formParent]="formSubFuncionalidad"
+        [value]="data?.link"
+      ></app-input>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <app-select
+        [formParent]="formSubFuncionalidad"
+        [label]="selectPadreSubFuncionalidad.label"
+        [name]="selectPadreSubFuncionalidad.name"
+        [required]="selectPadreSubFuncionalidad.required"
+        [options]="selectPadreSubFuncionalidad.options"
+        [value]="data?.id_funcionalidad"
+      ></app-select>
+    </div>
+  </div>
+  <!-- <div class="row">
+    <div class="col-md-12" [formGroup]="formSubFuncionalidad">
+      <label for="estado">Estado: </label>
+      <div class="clearfix"></div>
+      <mat-slide-toggle id="estado" color="primary" formControlName="estado">{{
+        formSubFuncionalidad.value.estado ? "Activo" : "Inactivo"
+      }}</mat-slide-toggle>
+    </div>
+  </div> -->
+</mat-dialog-content>
+<mat-divider></mat-divider>
+
+<mat-dialog-actions align="end">
+  <app-button
+    [load]="load"
+    [class]="btnSave.class"
+    [texto]="btnSave.texto"
+    [color]="btnSave.color"
+    (click)="save()"
+  ></app-button>
+  <app-button
+    [load]="load"
+    [class]="btnCancel.class"
+    [texto]="btnCancel.texto"
+    [color]="btnCancel.color"
+    (click)="cancel()"
+  ></app-button>
+</mat-dialog-actions>

@@ -1,0 +1,38 @@
+@import "../../../../scss/variables";
+
+.example-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.content ~ ::ng-deep .mat-drawer-content {
+  // background-color: red;
+  // margin-left: 44px !important;
+  margin-left: 65px !important;
+  transition: all 0.1s ease-in 0.2s;
+}
+.mat-drawer {
+  background-color: $primary;
+  width: 220px;
+  &.content {
+    width: 66px;
+  }
+  .position-absolute {
+    bottom: 20px;
+  }
+  p {
+    color: $white;
+    font-size: 1rem;
+    margin-left: 20px;
+    margin-top: 15px;
+  }
+  .divider {
+    border-top-color: rgba(255, 255, 255, 0.12);
+  }
+}
+// .contenido {
+//   height: calc(100% - 80px)!important;
+// }

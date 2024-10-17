@@ -1,0 +1,110 @@
+<h2 mat-dialog-title>Detalle</h2>
+<mat-icon mat-dialog-close class="close">cancel</mat-icon>
+<mat-divider></mat-divider>
+<mat-dialog-content class="mat-typography">
+  <div class="row">
+    <div class="col-md-6 d-flex align-items-center">
+      <h2>
+         <label>N° secuencia:</label> <strong> {{ data.secuencia }}</strong> | 
+        <label>Proceso:</label> <strong> {{ data.nombre_proceso }}</strong> | 
+        <label>Fecha:</label> <strong> {{ data.fecha_proceso | date : "dd/MM/yyyy" : "UTC" }}</strong>
+      </h2>
+    </div>
+    <div class="col-md-6 text-end">
+      <app-button
+        [load]="load"
+        [class]="btnDescarga.class"
+        [texto]="btnDescarga.texto"
+        [color]="btnDescarga.color"
+        (click)="exportTable()"
+      ></app-button>
+      <!-- <mat-form-field appearance="standard">
+                    <mat-label>Filter</mat-label>
+                    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+                  </mat-form-field> -->
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="mat-elevation-z8 bg-table">
+        <div class="table-responsive">
+          <table
+            mat-table
+            [dataSource]="dataSource"
+            matSort
+            id="TableSecuencias"
+          >
+            <ng-container
+              [matColumnDef]="column"
+              *ngFor="let column of displayedColumns"
+            >
+              <th
+                [ngClass]="{ hidden: column == 'id' }"
+                mat-header-cell
+                *matHeaderCellDef
+                mat-sort-header
+              >
+              <div *ngIf="column.includes('secuencia')">
+                Secuencia
+              </div>
+              <div *ngIf="column === 'resultado'">
+                Descripción
+              </div>
+              <div *ngIf="column !== 'resultado' && !column.includes('secuencia')">
+                {{ column | header }}
+              </div>
+              </th>
+              <td
+                [ngClass]="{ campo: column === 'resultado' }"
+                mat-cell
+                *matCellDef="let element"
+              >
+              <!-- FECHA -->
+              <div *ngIf="column.includes('fecha')">
+                {{ element[column] | date : "dd/MM/yyyy H:mm:ss" : "UTC" }}
+              </div>
+              <!-- DESCRIPCION -->
+                <div *ngIf="!column.includes('fecha') && column !== 'estado'">
+                  {{ element[column] }}
+                </div>
+                <!-- ESTADO -->
+                <div *ngIf="column === 'estado'">
+                  <span [class]="eEstadoM[element[column]]">{{
+                    eEstadoM[element[column]]
+                  }}</span>
+                </div>
+              </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+            <tr class="mat-row" *matNoDataRow>
+              <td class="mat-cell" colspan="4">No encontramos registros</td>
+            </tr>
+          </table>
+          <mat-paginator
+            [pageSizeOptions]="[10, 25, 100]"
+            aria-label="Select page of users"
+          ></mat-paginator>
+        </div>
+      </div>
+    </div>
+  </div>
+</mat-dialog-content>
+<!-- <mat-divider></mat-divider>
+<mat-dialog-actions align="end">
+ <app-button
+    [load]="load"
+    [class]="btnSave.class"
+    [texto]="btnSave.texto"
+    [color]="btnSave.color"
+    (click)="save()"
+  ></app-button>
+  <app-button
+    [load]="load"
+    [class]="btnCancel.class"
+    [texto]="btnCancel.texto"
+    [color]="btnCancel.color"
+    (click)="cancel()"
+  ></app-button>
+</mat-dialog-actions> -->

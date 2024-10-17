@@ -1,0 +1,39 @@
+table {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  thead {
+    th {
+      line-height: 44px !important;
+      color: #534d59;
+      font-weight: 600;
+      font-size: 0.875rem;
+      // background: red;
+      white-space: pre;
+      &:first-of-type {
+        padding-left: 24px;
+      }
+      &:last-of-type {
+        padding-right: 24px;
+      }
+    }
+  }
+  tbody {
+    background: white;
+    td {
+      // background: blue;
+      text-align: center;
+      line-height: 40px;
+      font-size: 14px;
+      font-weight: 400;
+      color: #534d59;
+      .mat-icon {
+        margin-top: 10px;
+      }
+      &:first-of-type {
+        padding-left: 24px;
+      }
+      &:last-of-type {
+        padding-right: 24px;
+      }
+    }
+  }
+}

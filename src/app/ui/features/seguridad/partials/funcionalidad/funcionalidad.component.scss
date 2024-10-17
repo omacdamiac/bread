@@ -1,0 +1,8 @@
+@import "/src/scss/variables";
+.info {
+  border-radius: 50%;
+  border: 1px solid $primary;
+  line-height: 14px;
+  width: 21px;
+  padding-bottom: 5px;
+}

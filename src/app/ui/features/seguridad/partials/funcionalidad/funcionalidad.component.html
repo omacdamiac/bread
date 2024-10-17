@@ -1,0 +1,78 @@
+<h2 mat-dialog-title>
+  {{ data ? "Editar funcionalidad" : "Nueva funcionalidad" }}
+</h2>
+<mat-divider></mat-divider>
+<mat-dialog-content class="mat-typography- my-4">
+  <div class="row">
+    <div class="col-md-12">
+      <app-input
+        [required]="inputFuncionalidad.required"
+        [label]="inputFuncionalidad.label"
+        [name]="inputFuncionalidad.name"
+        [type]="inputFuncionalidad.type"
+        [placeholder]="inputFuncionalidad.place"
+        [formParent]="formFuncionalidad"
+        [value]="data?.nombre_funcionalidad"
+      ></app-input>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col-md-124">
+      <app-input
+        [required]="inputFuncionalidadLink.required"
+        [label]="inputFuncionalidadLink.label"
+        [name]="inputFuncionalidadLink.name"
+        [type]="inputFuncionalidadLink.type"
+        [placeholder]="inputFuncionalidadLink.place"
+        [formParent]="formFuncionalidad"
+        [value]="data?.link"
+      ></app-input>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <button
+        class="info float-end"
+        (click)="toIcon()"
+        matTooltip="Elegir icono"
+      >
+        ¡
+      </button>
+      <app-input
+        [required]="inputFuncionalidadIcon.required"
+        [label]="inputFuncionalidadIcon.label"
+        [name]="inputFuncionalidadIcon.name"
+        [type]="inputFuncionalidadIcon.type"
+        [placeholder]="inputFuncionalidadIcon.place"
+        [formParent]="formFuncionalidad"
+        [value]="data?.icono"
+      ></app-input>
+    </div>
+  </div>
+  <!-- <div class="row my-3">
+    <div class="col-md-12" [formGroup]="formFuncionalidad">
+      <label for="estado">Estado: </label>
+      <div class="clearfix"></div>
+      <mat-slide-toggle id="estado" color="primary" formControlName="estado">{{
+        formFuncionalidad.value.estado ? "Activo" : "Inactivo"
+      }}</mat-slide-toggle>
+    </div>
+  </div> -->
+</mat-dialog-content>
+<mat-divider></mat-divider>
+<mat-dialog-actions align="end">
+  <app-button
+    [load]="load"
+    [class]="btnSave.class"
+    [texto]="btnSave.texto"
+    [color]="btnSave.color"
+    (click)="save()"
+  ></app-button>
+  <app-button
+    [load]="load"
+    [class]="btnCancel.class"
+    [texto]="btnCancel.texto"
+    [color]="btnCancel.color"
+    (click)="cancel()"
+  ></app-button>
+</mat-dialog-actions>

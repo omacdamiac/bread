@@ -1,0 +1,133 @@
+<h2 mat-dialog-title>
+  {{ data ? "Editar usuario" : "Nuevo usuario" }}
+</h2>
+<mat-divider></mat-divider>
+<app-input
+  [formParent]="formUser"
+  [required]="inputNombre.required"
+  [label]="inputNombre.label"
+  [name]="inputNombre.name"
+  [type]="inputNombre.type"
+  [placeholder]="inputNombre.place"
+  [value]="data?.nombre"
+></app-input>
+<app-input-mail
+  [formParent]="formUser"
+  [required]="inputCorreo.required"
+  [label]="inputCorreo.label"
+  [name]="inputCorreo.name"
+  [placeholder]="inputCorreo.place"
+  [value]="data?.correo"
+>
+</app-input-mail>
+<!-- <app-input
+  [formParent]="formUser"
+  [required]="inputCorreo.required"
+  [label]="inputCorreo.text"
+  [name]="inputCorreo.name"
+  [type]="inputCorreo.type"
+  [placeholder]="inputCorreo.place"
+></app-input> -->
+<div class="row">
+  <div class="col-md-6">
+    <app-input
+      [formParent]="formUser"
+      [required]="inputUsername.required"
+      [label]="inputUsername.label"
+      [name]="inputUsername.name"
+      [type]="inputUsername.type"
+      [placeholder]="inputUsername.place"
+      [value]="data?.usuario"
+    ></app-input>
+  </div>
+  <div class="col-md-6"></div>
+</div>
+
+<div class="row my-3" [formGroup]="formUser">
+  <div class="col-md-6">
+    <label for="estado">Estado: </label>
+    <div class="clearfix"></div>
+    <mat-slide-toggle id="estado" color="primary" formControlName="estado">{{
+      formUser.value.estado ? "Activo" : "Inactivo"
+    }}</mat-slide-toggle>
+  </div>
+
+  <!-- <div class="col-md-6">
+    <p class="mt-3">
+      <mat-checkbox
+        color="primary"
+        (change)="add($event)"
+        formControlName="asignar"
+        >Asignar</mat-checkbox
+      >
+    </p>
+  </div>
+</div> -->
+  <div class="row" *ngIf="showAssign">
+    <div class="col-md-6">
+      <app-select
+        [formParent]="formUser"
+        [label]="selectPerfil.label"
+        [name]="selectPerfil.name"
+        [required]="selectPerfil.required"
+        [options]="selectPerfil.options"
+      ></app-select>
+    </div>
+    <div class="col-md-6">
+      <app-select
+        [formParent]="formUser"
+        [label]="selectRol.label"
+        [name]="selectRol.name"
+        [required]="selectRol.required"
+        [options]="selectRol.options"
+      ></app-select>
+      <!-- <input placeholder="Username" formControlName="perfil"> -->
+      <!-- <input placeholder="Password" formControlName="rol"> -->
+    </div>
+  </div>
+
+  <!-- 
+<div [formGroup]="formUser">
+
+  <div formArrayName="asignacion">
+
+    <div class="row" [formGroupName]="i" *ngFor="let direccion of getArrayControls(); let i = index">
+      <div class="col-md-6">
+        <app-select
+        [formParent]="formUser"
+        [label]="selectPerfil.label"
+        [name]="selectPerfil.name"
+        [required]="selectPerfil.required"
+        [options]="selectPerfil.options"
+      ></app-select>
+      </div>
+      <div class="col-md-6">
+        <app-select
+        [formParent]="formUser"
+        [label]="selectRol.label"
+        [name]="selectRol.name"
+        [required]="selectRol.required"
+        [options]="selectRol.options"
+      ></app-select>
+      </div> 
+    </div>
+  </div>
+</div> -->
+  <mat-divider></mat-divider>
+  <div class="float-end">
+    <app-button
+      [load]="load"
+      [class]="btnSaveUser.class"
+      [texto]="btnSaveUser.texto"
+      [color]="btnSaveUser.color"
+      (click)="save()"
+    ></app-button>
+    <app-button
+      [load]="load"
+      [class]="btnCancel.class"
+      [texto]="btnCancel.texto"
+      [color]="btnCancel.color"
+      (click)="cancel()"
+    ></app-button>
+  </div>
+</div>

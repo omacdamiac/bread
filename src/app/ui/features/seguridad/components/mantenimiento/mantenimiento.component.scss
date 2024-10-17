@@ -1,0 +1,119 @@
+@import "/src/scss/variables";
+
+ul {
+  list-style-type: none;
+  margin-top: 4px;
+}
+
+.mat {
+  &-checkbox {
+    line-height: 60px;
+  }
+  &-divider-vertical {
+    height: 100%;
+    width: 1px !important;
+    position: inherit !important;
+  }
+
+  &-card .mat-divider-horizontal {
+    position: relative;
+  }
+
+  &-list-item {
+    height: 80px;
+    &.h-auto {
+      height: auto;
+    }
+  }
+}
+
+::ng-deep .perfiles .mat-list-item-content {
+  font-family: Montserrat;
+  height: 80px !important;
+  .mat-icon {
+    color: $primary;
+    margin: 0 10px;
+    font-size: 20px;
+  }
+  &:hover > .mat-icon {
+    display: inline-block !important;
+  }
+  &:hover {
+    color: $primary;
+    cursor: pointer;
+    font-weight: bold;
+    background: $toast;
+  }
+}
+
+.example {
+  &-spacer {
+    flex: 1 1 auto;
+  }
+  &-section {
+    margin: 12px 0;
+  }
+  &-card {
+    margin: auto;
+  }
+  &-margin {
+    margin: 0 12px;
+  }
+}
+h2 {
+  display: flex;
+  align-items: center;
+  .mat-icon.icon_title {
+    margin-right: 5px;
+    &:hover {
+      color: $primary;
+      cursor: auto;
+    }
+  }
+}
+.icon-profile {
+  border: 2px solid gray;
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  .mat-icon {
+    color: gray;
+    font-size: 50px;
+  }
+}
+
+.listado-perfiles {
+  .mat-icon {
+    color: $primary;
+    margin: 0 10px;
+  }
+}
+
+.readon {
+  background: #ff0;
+  color: gray;
+  & .mat-icon {
+    color: gray;
+  }
+}
+.girar {
+  transform: rotate(90deg);
+}
+
+::ng-deep .mat-list-text {
+  flex-direction: row !important;
+  overflow: visible !important;
+}
+.mat-list-single-selected-option {
+  background: $expanded;
+  border-bottom: 2px solid $primary;
+  color: $primary;
+}
+.dark {
+  background: black !important;
+}
+.cdr{
+  background:  $expanded;
+  border-radius: 15px;
+  border-bottom: 3px solid $primary;
+}

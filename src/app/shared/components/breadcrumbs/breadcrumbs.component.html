@@ -1,0 +1,11 @@
+<ul class="mt-4">
+  <li *ngFor="let breadcrumb of breadcrumbs$ | async">
+    <!-- <ng-container *ngIf="breadcrumb.label === inicio; else bread">
+      <a [href]="breadcrumb.url"><mat-icon>home</mat-icon></a>
+    </ng-container>
+    <ng-template #bread> -->
+      <a [href]="breadcrumb.url">{{ breadcrumb.label}}</a>
+    <!-- </ng-template> -->
+  </li>
+</ul>
+<!-- <mat-divider></mat-divider> -->

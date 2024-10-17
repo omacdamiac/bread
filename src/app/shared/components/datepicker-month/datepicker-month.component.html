@@ -1,0 +1,43 @@
+<fieldset [formGroup]="formParent">
+  <label [for]="name" class="fecha"
+    >{{ label }}
+    <span
+      [ngClass]="{
+        isvalid:
+          formParent.controls[name].invalid &&
+          (formParent.controls[name].dirty || formParent.controls[name].touched)
+      }"
+      >*</span
+    >
+  </label>
+  <mat-form-field appearance="outline" class="fecha" (click)="picker.open()">
+    <input
+      [formControlName]="name"
+      [name]="name"
+      [id]="name"
+      matInput
+      [matDatepicker]="picker"
+      [placeholder]="placeholder"
+      [required]="required"
+      [value]="value"
+    />
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker
+      #picker
+      startView="multi-year"
+      (yearSelected)="chosenYearHandler($event)"
+      (monthSelected)="chosenMonthHandler($event, picker)"
+      panelClass="example-month-picker"
+    >
+    </mat-datepicker>
+  </mat-form-field>
+  <span
+    class="isvalid"
+    *ngIf="
+      formParent.controls[name].invalid &&
+      (formParent.controls[name].dirty || formParent.controls[name].touched)
+    "
+  >
+    {{ label }} es requerido
+  </span>
+</fieldset>

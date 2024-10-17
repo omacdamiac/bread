@@ -1,0 +1,70 @@
+<app-loader></app-loader>
+<mat-drawer-container class="example-container mat-typography-">
+  <mat-drawer
+    #drawer
+    mode="side"
+    disableClose="true"
+    opened="true"
+    [ngClass]="{ content: !hide }"
+  >
+    <button mat-button color="accent" (click)="toggleActiveMenu()">
+      <mat-icon mat-list-icon>menu</mat-icon>
+    </button>
+    <div class="clearfix"></div>
+    <div class="w-100 text-center">
+      <img
+        *ngIf="hide"
+        src="./assets/logo.png"
+        width="100"
+        alt="Banco Ripley"
+        class="mx-auto"
+      />
+    </div>
+    <img
+      *ngIf="!hide"
+      src="./assets/bar-logo.jpg"
+      width="65"
+      alt="Banco Ripley"
+    />
+    <h4 *ngIf="hide" class="text-white text-center mt-2 mx-4 mb-5">
+      Plataforma Regulatoria Integral
+    </h4>
+    <!-- <mat-divider class="divider"></mat-divider>
+    <p>¡Hola {{ user }}!</p>
+    <mat-divider class="divider"></mat-divider> -->
+    <!-- menu -->
+    <app-nav [hide]="hide" [main]="data.items"></app-nav>
+    <!-- <div class="position-absolut">
+          <mat-nav-list>
+            <div class="menu-mat">
+              <mat-list-item routerLink="/">
+                <mat-icon mat-list-icon class="d-inline-block text-white">logout</mat-icon>
+                <span class="d-inline-block text-white">Cerrar sesión</span>
+              </mat-list-item>
+            </div>
+          </mat-nav-list>
+        </div> -->
+  </mat-drawer>
+
+  <div class="example-sidenav-content" [ngClass]="{ list: hide }">
+    <!-- <div class="example-sidenav-content"> -->
+    <nav class="text-end d-flex align-items-center justify-content-end">
+      {{ user }}
+      <div class="user text-center rounded-circle bg-light mx-3 fw-bold">
+        {{ userCircle }}
+      </div>
+    </nav>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <app-breadcrumbs></app-breadcrumbs>
+          <router-outlet></router-outlet>
+          <!-- <div style="height: 1500px">
+                          Hola
+                      </div> -->
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+</mat-drawer-container>

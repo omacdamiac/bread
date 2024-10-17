@@ -1,0 +1,19 @@
+.mat-toolbar {
+  &.mat-toolbar-multiple-rows {
+    background-color: transparent;
+  }
+  ul {
+    list-style: none;
+    padding-top: 20px;
+    li {
+      display: inline-block;
+      line-height: 20px;
+      a {
+        color: $font-color;
+        font-size: 0.875rem;
+        padding:4px 8px 4px 8px;
+        margin: 0 4px;
+      }
+    }
+  }
+}

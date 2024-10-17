@@ -1,0 +1,9 @@
+::ng-deep .table {
+  & thead tr th:nth-child(3) {
+    text-align: left !important;
+  }
+  & tbody tr td:nth-child(3) {
+    white-space: pre;
+    text-align: left !important;
+  }
+}

@@ -1,0 +1,10 @@
+<button mat-flat-button [color]="color" [ngClass]="class" (click)="action()">
+    {{texto}}<mat-spinner [diameter]="20" color="accent" *ngIf="load"></mat-spinner>
+</button>
+<!-- <ng-container *ngIf="type === 'borde'; else Border">
+    <button mat-stroked-button [color]="color" (click)="action()">{{texto}}</button>
+</ng-container>
+<ng-template #Border>
+    <button mat-raised-button [color]="color" (click)="action()">{{texto}}</button>
+</ng-template> -->
+

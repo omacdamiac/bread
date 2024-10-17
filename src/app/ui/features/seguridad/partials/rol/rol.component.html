@@ -1,0 +1,43 @@
+<h2 mat-dialog-title>{{ data ? "Editar rol" : "Nuevo rol" }}</h2>
+<mat-divider></mat-divider>
+<mat-dialog-content class="mat-typography- my-4">
+  <div class="row">
+    <div class="col-md-12">
+      <app-input
+        [required]="inputRol.required"
+        [label]="inputRol.label"
+        [name]="inputRol.name"
+        [type]="inputRol.type"
+        [placeholder]="inputRol.place"
+        [formParent]="formRol"
+        [value]="data?.nombre_rol"
+      ></app-input>
+    </div>
+  </div>
+  <!-- <div class="row my-3">
+    <div class="col-md-12" [formGroup]="formRol">
+      <label for="estado">Estado: </label>
+      <div class="clearfix"></div>
+      <mat-slide-toggle id="estado" color="primary" formControlName="estado">{{
+        formRol.value.estado ? "Activo" : "Inactivo"
+      }}</mat-slide-toggle>
+    </div>
+  </div> -->
+</mat-dialog-content>
+<mat-divider></mat-divider>
+<mat-dialog-actions align="end">
+  <app-button
+    [load]="load"
+    [class]="btnSave.class"
+    [texto]="btnSave.texto"
+    [color]="btnSave.color"
+    (click)="save()"
+  ></app-button>
+  <app-button
+    [load]="load"
+    [class]="btnCancel.class"
+    [texto]="btnCancel.texto"
+    [color]="btnCancel.color"
+    (click)="cancel()"
+  ></app-button>
+</mat-dialog-actions>

@@ -1,0 +1,21 @@
+@import "/src/scss/variables";
+.mat {
+  &-line.hint {
+    font-size: 10px !important;
+  }
+  &-list-item {
+    cursor: pointer;
+    height: 72px;
+    display: inline-block;
+    width: auto;
+    margin: 5px;
+    &:hover {
+      border: 1px solid $primary;
+    }
+    .mat-icon,
+    a {
+      color: $primary;
+      text-decoration: none;
+    }
+  }
+}

@@ -1,0 +1,39 @@
+::ng-deep .mat{
+    &-dialog-container {
+        position: relative !important;
+    }
+    &-dialog-content {
+        max-height: fit-content!important;
+    }
+}
+.close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    padding: 5px;
+    line-height: 14px;
+    min-width: auto;
+}
+.campo{
+    white-space:pre-line;
+    width: 700px;
+}
+th.mat-header-cell:nth-child(1),
+td.mat-cell:nth-child(1) {
+  padding-left: 24px;
+  width: 70px;
+}
+th.mat-header-cell:nth-child(2),
+td.mat-cell:nth-child(2) {
+  padding-left: 24px;
+  width: 70px;
+}
+th.mat-header-cell:nth-child(3),
+td.mat-cell:nth-child(3) {
+  padding-left: 24px;
+  width: 70%;
+}
+label{
+    font-size: 1rem ;
+    letter-spacing: .5px;
+}

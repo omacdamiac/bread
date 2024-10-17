@@ -1,0 +1,45 @@
+<mat-nav-list [ngClass]="{ list: hide }">
+  <!-- <mat-nav-list> -->
+  <div *ngFor="let item of main" class="menu-mat">
+    <mat-list-item [routerLink]="item.link" [routerLinkActive]="'is-active'" >
+      <mat-icon mat-list-icon>{{ item.icono }}</mat-icon>
+      <h4 (click)="setFuncionalidad(item.id)">{{ item.nombre_funcionalidad }}</h4>
+      <ng-container *ngIf="item.childs">
+        <!-- <div class="d-block">
+        <mat-list-item *ngFor="let sub of item.childs" [routerLink]="sub.link" [routerLinkActive]="'is-active'" class="d-block">
+          <mat-icon mat-list-icon>{{ sub.icon }}</mat-icon>
+          <h4>{{ sub.text }}</h4>
+        </mat-list-item>
+      </div> -->
+      </ng-container>
+    </mat-list-item>
+    <mat-list-item class="child" color="warn" *ngFor="let sub of item?.childs" [routerLink]="sub.link" [routerLinkActive]="'is-active'">
+      <!-- <mat-icon mat-list-icon>{{ sub.icon }}</mat-icon> -->
+      <h4 class="ms-5">{{ sub.nombre_subfuncionalidad }}</h4>
+    </mat-list-item>
+  </div>
+  <div class="position-absolute">
+    <mat-list-item routerLink="/">
+      <mat-icon mat-list-icon>logout</mat-icon>
+      <h4>Cerrar sesión</h4>
+    </mat-list-item>
+  </div>
+  <!-- <mat-list-item routerLink="/procesos">
+      <a  style="background: red;">
+        <mat-icon mat-list-icon>menu</mat-icon>
+        <h4>procesos ></h4>
+      </a>
+      </mat-list-item>
+  <mat-list-item>
+    <mat-icon mat-list-icon>assignment</mat-icon>
+    <h4>Assignment</h4>
+  </mat-list-item>
+  <mat-list-item>
+    <mat-icon mat-list-icon>domain</mat-icon>
+    <h4>Domain</h4>
+  </mat-list-item>
+  <mat-list-item>
+    <mat-icon mat-list-icon>folder_shared</mat-icon>
+    <h4>Folder shared</h4>
+  </mat-list-item> -->
+</mat-nav-list>

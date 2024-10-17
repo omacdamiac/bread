@@ -1,0 +1,53 @@
+<div class="container">
+  <app-title [title]="title"></app-title>
+  <h2>{{ subtitle }}</h2>
+  <p class="p-3">{{ textBody }}</p>
+  <mat-tab-group>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="example-tab-icon">dashboard</mat-icon>
+        Visitados recientemente
+      </ng-template>
+      {{userSession}}
+      <mat-list>
+        <mat-list-item
+          *ngFor="let acces of navigation"
+          class="card"
+          [routerLink]="acces?.endpoint"
+        >
+          <mat-icon mat-list-icon>{{ acces?.icono }}</mat-icon>
+          <div mat-line>
+            <a>{{ acces?.nombre_funcionalidad }}</a>
+          </div>
+          <!-- <mat-hint>Hint</mat-hint> -->
+          <div mat-line class="hint">{{ acces?.fecha_creacion }}</div>
+        </mat-list-item>
+        <!-- <div mat-subheader>Visitados recientemente</div> -->
+        <!-- <mat-divider></mat-divider>
+        <div mat-subheader>Notes</div>
+        <mat-list-item *ngFor="let note of notes">
+          <mat-icon mat-list-icon>{{note.icono}}</mat-icon>
+          <div mat-line>{{note.modulo}}</div>
+          <div mat-line> {{note.fecha_creacion | date}} </div>
+        </mat-list-item> -->
+      </mat-list>
+    </mat-tab>
+
+    <!-- <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="example-tab-icon">thumb_up</mat-icon>
+        Second
+      </ng-template>
+      Content 2
+    </mat-tab>
+  
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="example-tab-icon">thumb_up</mat-icon>
+        Third
+      </ng-template>
+  
+      Content 3
+    </mat-tab> -->
+  </mat-tab-group>
+</div>
